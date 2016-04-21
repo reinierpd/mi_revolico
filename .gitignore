@@ -15,5 +15,4 @@
 /log/*
 !/log/.keep
 /tmp
-# Ignore .idea files
 /.idea/*
