@@ -12,11 +12,11 @@
         <li class="nav-header">Actions</li>
         <li><%= link_to 'New Announce', new_announce_path %></li>
         <li>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          <%= link_to t('.edit', :default => t("helpers.links.edit")+' Category'),
                         edit_category_path(@category) %>
         </li>
         <li>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy"))+' Category',
                       category_path(@category),
                       :method => 'delete',
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %>
@@ -59,11 +59,11 @@
     </div>
     <div class="announce-links-container">
       <% @announces.each do |announce| %>
-          <h4>
+          <h5>
             <%= link_to ("#{announce.price.to_s}cuc  #{announce.title}" ), announce_path(announce), :class=>'announce'%>
-          </h4>
+          </h5>
+      <%end%>
     </div>
-    <%end%>
   </div>
 </div>
 

@@ -14,6 +14,9 @@
  *= require_self
  */
 
+html, body{
+    font-size: 16px;
+}
 .search-container{
     margin-bottom: 20px;
 }
@@ -25,5 +28,15 @@ a:hover{
 
 a.announce{
     color: blue;
-    text-decoration: underline;
+    border-bottom: 1px solid blue;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.dl-horizontal > dt{
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.dl-horizontal > dd a{
+    margin-right: 10px;
 }

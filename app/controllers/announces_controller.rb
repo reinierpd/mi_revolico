@@ -22,6 +22,12 @@ class AnnouncesController < ApplicationController
   def edit
     # @categories = Category.all.collect{|category| [category.name, category.id]}
     @categories = Category.all
+    @selected_cats= @announce.categories
+    @selected_ids = []
+
+    @selected_cats.each do |cat|
+      @selected_ids << cat.id
+    end
   end
 
   # POST /announces
@@ -60,7 +66,7 @@ class AnnouncesController < ApplicationController
   def destroy
     @announce.destroy
     respond_to do |format|
-      format.html { redirect_to announces_url, notice: 'Announce was successfully destroyed.' }
+      format.html { redirect_to categories_url, notice: 'Announce was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -73,6 +79,6 @@ class AnnouncesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def announce_params
-      params.require(:announce).permit(:title, :content, :price, category_ids:[])
+      params.require(:announce).permit(:title, :content, :price, :image1, :image2, :image3, category_ids:[])
     end
 end

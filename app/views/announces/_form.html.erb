@@ -1,4 +1,4 @@
-<%= form_for @announce, :html => { :class => "form-horizontal announce" } do |f| %>
+<%= form_for @announce, :html=>{:multipart=>true}, :html => { :class => "form-horizontal announce" } do |f| %>
 
     <% if @announce.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -39,7 +39,25 @@
     <div class="form-group">
       <%= f.label :category_ids,:text=>'Categorias' , :class => 'control-label' %>
       <div class="controls">
-        <%= f.select_tag :category_ids, options_from_collection_for_select(@categories,'id','name',@announce.categories{|c| c.id}), :class => 'form-control', :multiple=>true, :size=>6 %>
+        <%= f.select_tag :category_ids, options_from_collection_for_select(@categories,'id','name',@selected_ids), :class => 'form-control', :multiple=>true, :size=>6 %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :image1, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :image1%>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :image2, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :image2%>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :image3, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :image3%>
       </div>
     </div>
     <div class="form-group">
