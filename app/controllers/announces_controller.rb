@@ -15,19 +15,23 @@ class AnnouncesController < ApplicationController
   # GET /announces/new
   def new
     @announce = Announce.new
+    @categories = Category.all
   end
 
   # GET /announces/1/edit
   def edit
+    # @categories = Category.all.collect{|category| [category.name, category.id]}
+    @categories = Category.all
   end
 
   # POST /announces
   # POST /announces.json
   def create
     @announce = Announce.new(announce_params)
-
+    @categories = Category.find(params[:category_ids])
     respond_to do |format|
       if @announce.save
+        @announce.categories = @categories
         format.html { redirect_to @announce, notice: 'Announce was successfully created.' }
         format.json { render :show, status: :created, location: @announce }
       else
@@ -69,6 +73,6 @@ class AnnouncesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def announce_params
-      params.require(:announce).permit(:title, :content, :price)
+      params.require(:announce).permit(:title, :content, :price, category_ids:[])
     end
 end

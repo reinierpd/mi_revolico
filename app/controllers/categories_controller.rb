@@ -10,6 +10,12 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    if params[:q].present?
+      @search = Announce.ransack(params[:q])
+    else
+      @search = Announce.ransack(categories_id_eq:params[:id])
+    end
+    @announces = @search.result()
   end
 
   # GET /categories/new

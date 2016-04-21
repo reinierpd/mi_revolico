@@ -13,6 +13,17 @@
  *= require_tree .
  *= require_self
  */
-.page_content{
-    padding-top: 80px;
+
+.search-container{
+    margin-bottom: 20px;
+}
+
+a:hover{
+    background: transparent;
+    color: inherit;
+}
+
+a.announce{
+    color: blue;
+    text-decoration: underline;
 }

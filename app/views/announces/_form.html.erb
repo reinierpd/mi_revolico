@@ -1,29 +1,51 @@
-<%= form_for(@announce) do |f| %>
-  <% if @announce.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@announce.errors.count, "error") %> prohibited this announce from being saved:</h2>
+<%= form_for @announce, :html => { :class => "form-horizontal announce" } do |f| %>
 
-      <ul>
-      <% @announce.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @announce.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@announce.errors.count, "error") %> prohibited this announce from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @announce.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+
   </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
+  <div class="form-group">
+    <%= f.label :content, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :content, :class => 'form-control' %>
+    </div>
+
   </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
+  <div class="form-group">
+    <%= f.label :price, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :price, :type=>'number', :min=>0, :class => 'form-control' %>
+    </div>
+
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form-group">
+      <%= f.label :category_ids,:text=>'Categorias' , :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select_tag :category_ids, options_from_collection_for_select(@categories,'id','name',@announce.categories{|c| c.id}), :class => 'form-control', :multiple=>true, :size=>6 %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  announces_path, :class => 'btn btn-default' %>
+    </div>
+
 <% end %>
