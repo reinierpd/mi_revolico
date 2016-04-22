@@ -22,22 +22,16 @@ class AnnouncesController < ApplicationController
   def edit
     # @categories = Category.all.collect{|category| [category.name, category.id]}
     @categories = Category.all
-    @selected_cats= @announce.categories
-    @selected_ids = []
-
-    @selected_cats.each do |cat|
-      @selected_ids << cat.id
-    end
   end
 
   # POST /announces
   # POST /announces.json
   def create
     @announce = Announce.new(announce_params)
-    @categories = Category.find(params[:category_ids])
+    categories = Category.find(params[:category_ids])
     respond_to do |format|
       if @announce.save
-        @announce.categories = @categories
+        @announce.categories = categories
         format.html { redirect_to @announce, notice: 'Announce was successfully created.' }
         format.json { render :show, status: :created, location: @announce }
       else
