@@ -1,10 +1,41 @@
 <%- model_class = Announce -%>
-<div class="page-header">
-  <h1> <%= link_to t('.back', :default => t("helpers.links.back")),
-                   categories_path, :class => 'btn btn-default'  %>
-    <%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+            categories_path, :class => 'btn btn-default'  %>
+<div>
+  <h3><%= @announce.title %></h3>
 </div>
 <div class="row">
+
+  <div class="col-md-9">
+    <p>
+      <strong><%= model_class.human_attribute_name(:price) %>:  </strong>
+      <%= @announce.price %> cuc </br>
+      <strong>Date:  </strong>
+      <%= @announce.created_at.strftime("%b %e, %Y at %H:%M:%S")%>
+    </p>
+    <p>
+      <%= @announce.content %>
+    </p>
+    <div>
+      <% if @announce.image1.present? %>
+          <%= link_to @announce.image1.url , :class=>'image-link' , :target=>'blank' do  %>
+              <%= image_tag @announce.image1.url(:thumb) %>
+          <% end %>
+    <% end %>
+      <% if @announce.image2.present? %>
+          <%= link_to @announce.image2.url , :class=>'image-link' , :target=>'blank' do  %>
+              <%= image_tag @announce.image2.url(:thumb) %>
+          <% end %>
+    <% end %>
+      <% if @announce.image3.present? %>
+          <%= link_to @announce.image3.url , :class=>'image-link' , :target=>'blank' do  %>
+              <%= image_tag @announce.image3.url(:thumb) %>
+           <% end %>
+      <% end %>
+
+    </div>
+
+  </div>
   <div class="col-md-3">
     <div class="well sidebar-nav">
       <ul class="nav nav-list">
@@ -22,35 +53,6 @@
       </ul>
     </div><!--/.well -->
   </div><!--/span-->
-  <div class="col-md-9">
-    <dl class="dl-horizontal">
-      <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-      <dd><%= @announce.title %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-      <dd><%= @announce.content %></dd>
-      <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
-      <dd><%= @announce.price %>cuc</dd>
-      <dd>
-        <% if @announce.image1.present? %>
-            <a href="<%= @announce.image1.url %>" target="_blank">
-              <%= image_tag @announce.image1.url(:thumb) %>
-            </a>
-        <% end %>
-        <% if @announce.image2.present? %>
-            <a href="<%= @announce.image2.url %>" target="_blank">
-              <%= image_tag @announce.image2.url(:thumb) %>
-            </a>
-        <% end %>
-        <% if @announce.image3.present? %>
-            <a href="<%= @announce.image3.url %>" target="_blank">
-              <%= image_tag @announce.image3.url(:thumb) %>
-            </a>
-        <% end %>
-
-      </dd>
-
-    </dl>
-  </div>
 </div>
 
 
