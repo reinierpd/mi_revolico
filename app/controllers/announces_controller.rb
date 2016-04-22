@@ -28,10 +28,11 @@ class AnnouncesController < ApplicationController
   # POST /announces.json
   def create
     @announce = Announce.new(announce_params)
-    categories = Category.find(params[:category_ids])
+    @categories = Category.all
+    categories_ids = Category.find(params[:category_ids])
     respond_to do |format|
       if @announce.save
-        @announce.categories = categories
+        @announce.categories = categories_ids
         format.html { redirect_to @announce, notice: 'Announce was successfully created.' }
         format.json { render :show, status: :created, location: @announce }
       else
